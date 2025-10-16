@@ -6,9 +6,8 @@
 1. Clone repository of the NIKA:
    
     ```sh
-    git clone https://github.com/NikitaZotov/nika
+    git clone https://github.com/ostis-apps/nika
     cd nika
-    git checkout feat/migrate_to_0.10.0
     git submodule update --init --recursive
     ```
 
@@ -21,14 +20,13 @@
 3. Build knowledge base:
 
     ```sh
-    ./install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ./scripts/start.sh build_kb
     ```
 
 4. Run C++ problem solver:
 
     ```sh
-    ./install/sc-machine/bin/sc-machine -s kb.bin -c nika.ini \
-        -e "install/sc-machine/lib/extensions;install/scl-machine/lib/extensions;install/problem-solver/lib/extensions"
+    ./scripts/start.sh machine
     ```
 
 5. Install and build sc-web. Open new terminal and run:
@@ -37,12 +35,13 @@
     cd sc-web
     ./scripts/install_dependencies.sh
     npm run build
+    cd ..
     ```
 
 6. Run sc-web:
    
     ```sh
-    source .venv/bin/activate && python3 server/app.py
+    ./scripts/start.sh web
     ```
 
 7.  Install Python problem solver dependencies. Open new terminal and run in the root of the project:
@@ -56,7 +55,7 @@
 8.  Run Python problem-solver:
     
     ```sh
-    python3 problem-solver/py/server.py
+    ./scripts/start.sh py_server
     ```
 
 9.   Install and build React interface. Open new terminal and run:
@@ -70,5 +69,5 @@
 10. Run React interface:
 
     ```sh
-    npm run start
+    ./scripts/start.sh interface
     ```

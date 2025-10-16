@@ -2,13 +2,13 @@
 set -eo pipefail
 
 # Constants
-SC_MACHINE_VERSION="0.10.0"
+SC_MACHINE_VERSION="0.10.4"
 SC_MACHINE_DESTINATION_DIR="install/sc-machine"
 
-SCL_MACHINE_VERSION="0.3.0"
+SCL_MACHINE_VERSION="0.3.1"
 SCL_MACHINE_DESTINATION_DIR="install/scl-machine"
 
-NIKA_VERSION="0.1.0"
+NIKA_VERSION="0.2.2"
 NIKA_DESTINATION_DIR="install/problem-solver"
 
 get_archive_name() {

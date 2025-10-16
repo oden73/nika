@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.2.2] - 04.06.2025
+
+### Fixed
+
+- Relative paths for configs in start.sh
+- Install non-atomic-action-interpreter-module into extensions directory
+
+## [0.2.1] - 04.06.2025
+
+### Fixed
+
+- Use DYLD_LIBRARY_PATH to run sc-machine on macOS
+- Install common library into lib directory
+
+## [0.2.0] - 03.06.2025
+
+### Added
+
+- Training Guide
+
+### Changed
+
+- Migrate to OSTIS Platform 0.10.0
+
 ## [0.1.0] - 01.09.2023
 
 ### Added
