@@ -19,6 +19,9 @@ AlternativeMessageTopicClassificationAgent::AlternativeMessageTopicClassificatio
 
 ScResult AlternativeMessageTopicClassificationAgent::DoProgram(ScActionInitiatedEvent const & event, ScAction & action)
 {
+  // line to check rasa classifier performance
+  return action.FinishUnsuccessfully();
+  
   ScAddrVector answerElements;
 
   ScAddr const & messageAddr = action.GetArgument(ScKeynodes::rrel_1);

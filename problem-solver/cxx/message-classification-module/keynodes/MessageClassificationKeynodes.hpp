@@ -21,6 +21,8 @@ public:
 
   static inline ScKeynode const nrel_wit_ai_idtf{"nrel_wit_ai_idtf"};
 
+  static inline ScKeynode const nrel_rasa_idtf{"nrel_rasa_idtf"};
+
   static inline ScKeynode const nrel_entity_possible_role{"nrel_entity_possible_role"};
 
   static inline ScKeynode const concept_not_classified_by_intent_message{"concept_not_classified_by_intent_message"};
