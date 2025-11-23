@@ -1,6 +1,6 @@
 #include "WitMessageTopicClassifier.hpp"
 
-#include "constants/MessageClassificationConstants.hpp"
+#include "constants/WitMessageClassificationConstants.hpp"
 #include "keynodes/MessageClassificationKeynodes.hpp"
 #include <common/keynodes/Keynodes.hpp>
 #include <common/searcher/MessageSearcher.hpp>
@@ -14,7 +14,7 @@ namespace messageClassificationModule
 WitMessageTopicClassifier::WitMessageTopicClassifier(
     ScAgentContext * context,
     utils::ScLogger * logger,
-    std::shared_ptr<WitAiClientInterface> const & client)
+    std::shared_ptr<ClientInterface> const & client)
   : context(context)
   , logger(logger)
   , client(client)
@@ -28,7 +28,7 @@ ScAddrVector WitMessageTopicClassifier::classifyMessage(ScAddr const & messageAd
 
   std::string const messageText = getMessageText(messageAddr);
 
-  json const witResponse = client->getWitResponse(messageText);
+  json const witResponse = client->getResponse(messageText);
   logger->Info(witResponse);
 
   ScAddrVector const messageIntentElements = getMessageIntentClass(messageAddr, witResponse);

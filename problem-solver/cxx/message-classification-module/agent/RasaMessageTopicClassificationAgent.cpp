@@ -6,9 +6,15 @@
 #include "manager/RasaMessageTopicClassificationManager.hpp"
 
 #include "keynodes/MessageClassificationKeynodes.hpp"
-#include "utils/ActionUtils.hpp"
+#include <common/utils/ActionUtils.hpp>
 
 using namespace messageClassificationModule;
+
+RasaMessageTopicClassificationAgent::RasaMessageTopicClassificationAgent()
+{
+  m_logger = utils::ScLogger(
+      utils::ScLogger::ScLogType::File, "logs/RasaMessageTopicClassificationAgent.log", utils::ScLogLevel::Debug, true);
+}
 
 ScResult RasaMessageTopicClassificationAgent::DoProgram(ScActionInitiatedEvent const & event, ScAction & action)
 {
@@ -26,7 +32,7 @@ ScResult RasaMessageTopicClassificationAgent::DoProgram(ScActionInitiatedEvent c
   }
   catch (utils::ScException & exception)
   {
-    SC_AGENT_LOG_ERROR(exception.Description());
+    m_logger.Error(exception.Description());
     ActionUtils::wrapActionResultToScStructure(&m_context, action, answerElements);
 
     return action.FinishUnsuccessfully();
@@ -49,5 +55,5 @@ ScAddr RasaMessageTopicClassificationAgent::GetActionClass() const
 void RasaMessageTopicClassificationAgent::initFields()
 {
   std::unique_ptr<ClientInterface> client = std::make_unique<RasaClient>();
-  this->manager = std::make_unique<RasaMessageTopicClassificationManager>(&m_context);
+  this->manager = std::make_unique<RasaMessageTopicClassificationManager>(&m_context, &m_logger);
 }

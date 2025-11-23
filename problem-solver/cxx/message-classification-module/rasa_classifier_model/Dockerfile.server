@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --no-cache-dir rasa==3.6.10
 
-WORKDIR /nika/problem-solver/cxx/messageClassificationModule/rasa_classifier_model
+WORKDIR /nika/problem-solver/cxx/message-classification-module/rasa_classifier_model
 
 COPY ./models ./models
 COPY ./components ./components

@@ -13,6 +13,9 @@ public:
   static inline ScKeynode const action_alternative_message_topic_classification{
       "action_alternative_message_topic_classification"};
 
+  static inline ScKeynode const action_rasa_message_topic_classification{
+      "action_rasa_message_topic_classification"};
+
   static inline ScKeynode const concept_intent_possible_class{"concept_intent_possible_class"};
 
   static inline ScKeynode const concept_trait_possible_class{"concept_trait_possible_class"};

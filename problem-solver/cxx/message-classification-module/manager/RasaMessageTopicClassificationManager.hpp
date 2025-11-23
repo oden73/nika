@@ -11,7 +11,7 @@ namespace messageClassificationModule
 class RasaMessageTopicClassificationManager : public MessageTopicClassificationManagerInterface
 {
 public:
-  explicit RasaMessageTopicClassificationManager(ScAgentContext * context);
+  explicit RasaMessageTopicClassificationManager(ScAgentContext * context, utils::ScLogger * logger);
 
   ScAddrVector manage(ScAddrVector const & processParameters) const override;
 

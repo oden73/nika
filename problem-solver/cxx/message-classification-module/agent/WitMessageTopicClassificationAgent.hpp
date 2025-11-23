@@ -2,7 +2,7 @@
 
 #include <sc-memory/sc_agent.hpp>
 
-#include "manager/MessageTopicClassificationManager.hpp"
+#include "manager/WitMessageTopicClassificationManager.hpp"
 
 namespace messageClassificationModule
 {
@@ -16,7 +16,7 @@ public:
   ScResult DoProgram(ScActionInitiatedEvent const & event, ScAction & action) override;
 
 private:
-  std::unique_ptr<MessageTopicClassificationManager> manager;
+  std::unique_ptr<WitMessageTopicClassificationManager> manager;
 
   void initFields();
 };

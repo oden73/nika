@@ -10,6 +10,8 @@ namespace messageClassificationModule
 class RasaMessageTopicClassificationAgent : public ScActionInitiatedAgent
 {
 public:
+  RasaMessageTopicClassificationAgent();
+
   ScAddr GetActionClass() const override;
 
   ScResult DoProgram(ScActionInitiatedEvent const & event, ScAction & action) override;

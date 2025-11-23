@@ -4,8 +4,8 @@
 
 namespace messageClassificationModule
 {
-RasaMessageTopicClassificationManager::RasaMessageTopicClassificationManager(ScAgentContext * context)
-  : classifier(std::make_unique<RasaMessageTopicClassifier>(context, std::make_shared<RasaClient>()))
+RasaMessageTopicClassificationManager::RasaMessageTopicClassificationManager(ScAgentContext * context, utils::ScLogger * logger)
+  : classifier(std::make_unique<RasaMessageTopicClassifier>(context, logger, std::make_shared<RasaClient>()))
 {
 }
 

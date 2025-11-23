@@ -6,7 +6,7 @@ namespace messageClassificationModule
 {
 
 WitMessageTopicClassificationManager::WitMessageTopicClassificationManager(ScAgentContext * context, utils::ScLogger * logger)
-  : classifier(std::make_unique<MessageTopicClassifier>(context, logger, std::make_shared<WitAiClient>(logger)))
+  : classifier(std::make_unique<WitMessageTopicClassifier>(context, logger, std::make_shared<WitAiClient>(logger)))
 {
 }
 

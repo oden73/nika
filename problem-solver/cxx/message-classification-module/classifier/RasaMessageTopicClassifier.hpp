@@ -5,7 +5,7 @@
 #include "client/ClientInterface.hpp"
 #include "client/RasaClient.hpp"
 
-#include "searcher/MessageSearcher.hpp"
+#include <common/searcher/MessageSearcher.hpp>
 
 #include "keynodes/MessageClassificationKeynodes.hpp"
 
@@ -15,15 +15,16 @@ namespace messageClassificationModule
 class RasaMessageTopicClassifier
 {
 public:
-  explicit RasaMessageTopicClassifier(ScAgentContext * context, std::shared_ptr<RasaClient> const & client);
+  explicit RasaMessageTopicClassifier(ScAgentContext * context, utils::ScLogger * logger, std::shared_ptr<RasaClient> const & client);
 
   ScAddrVector classifyMessage(ScAddr const & messageAddr);
 protected:
   ScAgentContext * context;
+  utils::ScLogger * logger;
 
   ScAddrVector relationsToFindEntity{ScKeynodes::nrel_main_idtf, ScKeynodes::nrel_idtf};
 
-  std::unique_ptr<dialogControlModule::MessageSearcher> messageSearcher;
+  std::unique_ptr<commonModule::MessageSearcher> messageSearcher;
 
   std::shared_ptr<ClientInterface> client;
 
