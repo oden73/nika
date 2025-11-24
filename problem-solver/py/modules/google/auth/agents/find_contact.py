@@ -1,12 +1,17 @@
 import logging
 
-from sc_client.client import search_by_template
+from sc_client.client import (
+    search_by_template,
+)
 from sc_client.constants import sc_type
-from sc_client.models import ScAddr, ScTemplate
+from sc_client.models import (
+    ScAddr,
+    ScTemplate,
+)
 from sc_kpm import ScKeynodes, ScResult
 from sc_kpm.utils import (
-    generate_link,
     get_link_content_data,
+    search_element_by_non_role_relation,
 )
 from sc_kpm.utils.action_utils import (
     finish_action_with_status,
@@ -39,7 +44,6 @@ class FindContactAgent(IntegrationAgent):
         action_element: ScAddr,
     ) -> ScResult:
         try:
-            self.logger.info("Started")
             result = self.run(action_element)
             is_successful = result != ScResult.ERROR
             finish_action_with_status(action_element, is_successful)
@@ -49,18 +53,21 @@ class FindContactAgent(IntegrationAgent):
             )
             return result
         except Exception as e:
-            self.logger.error("%s", e)
+            self.logger.error("Finished with error: %s", e)
 
     def run(self, action_node: ScAddr) -> ScResult:
         name_link, self.author_node = get_action_arguments(action_node, 2)
-        contact_node = self.get_contact(name_link)
+        assert all([name_link, self.author_node])
+        name = get_link_content_data(name_link)
+        self.logger.info("Name link content: %s", name)
+        contact_node = self.get_contact(name)
+        if contact_node is None:
+            return ScResult.ERROR
         generate_action_result(action_node, contact_node)
-        self.logger.info("Finished successfully!")
-        finish_action_with_status(action_node)
 
         return ScResult.OK
 
-    def get_contact(self, name_link: ScAddr) -> ScAddr:
+    def get_contact(self, name: str) -> ScAddr:
         template = ScTemplate()
 
         tuple_alias = "_contacts_tuple"
@@ -78,20 +85,21 @@ class FindContactAgent(IntegrationAgent):
             sc_type.VAR_PERM_POS_ARC,
             sc_type.VAR_NODE >> contact_alias,
         )
-        template.quintuple(
-            contact_alias,
-            sc_type.VAR_COMMON_ARC,
-            generate_link(name_link),
-            sc_type.VAR_PERM_POS_ARC,
-            self.nrel_name,
-        )
 
-        res = search_by_template(template)
-        if res:
-            contact_node = res[0].get(contact_alias)
-            return contact_node
-        else:
+        results = search_by_template(template)
+        if results:
+            for res in results:
+                contact_node = res.get(contact_alias)
+                name_link = search_element_by_non_role_relation(
+                    contact_node,
+                    self.nrel_name,
+                    )
+                if name_link and get_link_content_data(name_link) == name:
+                    return contact_node
             self.logger.error(
-                "Did ot find contact with name %s",
-                get_link_content_data(name_link),
+                "Did not find contact with name %s",
+                name,
             )
+        else:
+            self.logger.error("Did not find contacts")
+            return None

@@ -28,7 +28,7 @@ class MailAgent(IntegrationAgent):
         super().__init__(action)
 
     def get_contact(self, name_link: ScAddr) -> User:
-        action_class_name = "action_google_auth"
+        action_class_name = "action_find_contact"
         action, is_successful = execute_agent(
             arguments={name_link: False, self.author_node: False},
             concepts=[

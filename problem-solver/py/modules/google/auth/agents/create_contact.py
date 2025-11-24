@@ -7,6 +7,7 @@ from sc_kpm import ScKeynodes, ScResult
 from sc_kpm.utils import (
     generate_link,
     get_link_content_data,
+    search_element_by_role_relation,
 )
 from sc_kpm.utils.action_utils import (
     finish_action_with_status,
@@ -31,6 +32,8 @@ class CreateContactAgent(IntegrationAgent):
             "nrel_contacts",
             sc_type.CONST_NODE_NON_ROLE,
         )
+        self.rrel_contact_name = ScKeynodes.get("rrel_contact_name")
+        self.rrel_contact_email = ScKeynodes.get("rrel_contact_email")
 
     def on_event(
         self,
@@ -51,11 +54,19 @@ class CreateContactAgent(IntegrationAgent):
         self.logger.info("Create contact agent started")
 
         try:
-            args = get_action_arguments(action_node, 3)
+            args = get_action_arguments(action_node, 2)
 
-            self.author_node = args[0]
-            name_link = args[1]
-            email_link = args[2]
+            self.author_node = args[1]
+            message_addr = args[0]
+
+            name_link = search_element_by_role_relation(
+            message_addr,
+            self.rrel_contact_name,
+        )
+            email_link = search_element_by_role_relation(
+            message_addr,
+            self.rrel_contact_email,
+        )
 
             if not (self.author_node and name_link and email_link):
                 self.logger.error(

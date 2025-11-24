@@ -58,7 +58,6 @@ class UpdateEventAgent(CalendarAgent):
             return ScResult.ERROR
 
     def run(self, action_node: ScAddr) -> ScResult:
-        self.logger.info("Started")
         message_addr, self.author_node = get_action_arguments(
             action_node,
             2,
@@ -77,15 +76,15 @@ class UpdateEventAgent(CalendarAgent):
             self.logger.error("Did not get event")
             return ScResult.ERROR
         new_event = self.get_new_event(message_addr)
-        event_with_id = self.search_event(author.access_token, event)
-        if event_with_id is None:
+        old_event = self.search_event(author.access_token, event)
+        if old_event is None:
             self.logger.info("Event hasn't been found in Google Calendar")
             return ScResult.ERROR
-        self.logger.info(f"Found event: {event_with_id.summary}")
+        self.logger.info(f"Found event: {old_event.summary}")
 
         res = self.update_event(
             author.access_token,
-            event_with_id,
+            old_event,
             new_event,
         )
         if res is None:
@@ -105,7 +104,7 @@ class UpdateEventAgent(CalendarAgent):
         self,
         access_token: str,
         event: EventBase,
-    ) -> EventBase | None:
+    ) -> UpdateEvent | None:
         headers = {
             "Authorization": f"Bearer {access_token}",
             "Accept": "application/json",
@@ -145,8 +144,8 @@ class UpdateEventAgent(CalendarAgent):
         old_event: UpdateEvent,
         new_event: UpdateEvent,
     ):
-        self.logger.info("%s", new_event)
-        self.logger.info("%s", old_event)
+        self.logger.info("NEW EVENT %s", new_event)
+        self.logger.info("OLD EVENT %s", old_event)
         headers = {
             "Authorization": f"Bearer {access_token}",
             "Accept": "application/json",
@@ -159,6 +158,9 @@ class UpdateEventAgent(CalendarAgent):
         )
 
         try:
+            if new_event.summary is None:
+                new_event.summary = old_event.summary
+
             if new_event.end.dateTime is None:
                 new_event.end = old_event.end
 
@@ -198,8 +200,8 @@ class UpdateEventAgent(CalendarAgent):
 
     def get_new_event(self, message_addr: ScAddr) -> UpdateEvent:
         summary = None
-        start_time = None
-        end_time = None
+        start: CalendarDateTime | None = None
+        end: CalendarDateTime | None = None
         # find links
         new_summary_link = search_element_by_role_relation(
             message_addr,
@@ -218,15 +220,15 @@ class UpdateEventAgent(CalendarAgent):
             summary = get_link_content_data(new_summary_link)
         if start_time_link:
             start_time = get_link_content_data(start_time_link)
+            start = CalendarDateTime(dateTime=start_time)
         if end_time_link:
             end_time = get_link_content_data(end_time_link)
+            end = CalendarDateTime(dateTime=end_time)
 
         event = UpdateEvent(
             summary=summary,
-            start=CalendarDateTime(
-                dateTime=start_time if start_time else None,
-            ),
-            end=CalendarDateTime(dateTime=end_time if end_time else None),
+            start=start,
+            end=end,
         )
 
         return event

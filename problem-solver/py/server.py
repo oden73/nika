@@ -5,6 +5,7 @@ import argparse
 from sc_kpm import ScServer
 
 from modules import (
+    GmailModule,
     GoogleAuthModule,
     GoogleCalendarModule,
     WeatherModule,
@@ -29,6 +30,7 @@ def main(args: dict):
             WeatherModule(),
             GoogleAuthModule(),
             GoogleCalendarModule(),
+            GmailModule(),
             ]
         server.add_modules(*modules)
         with server.register_modules():

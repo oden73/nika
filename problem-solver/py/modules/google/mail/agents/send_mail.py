@@ -8,7 +8,7 @@ from sc_client.models import ScAddr
 from sc_kpm import ScKeynodes, ScResult
 from sc_kpm.utils import (
     get_link_content_data,
-    search_element_by_non_role_relation,
+    search_element_by_role_relation,
 )
 from sc_kpm.utils.action_utils import (
     finish_action_with_status,
@@ -30,10 +30,10 @@ logging.basicConfig(
 
 class SendMailAgent(MailAgent):
     def __init__(self):
-        super().__init__("action_add_calendar_event")
-        self.nrel_contact_name = ScKeynodes.get("nrel_contact_name")
-        self.nrel_contact_email = ScKeynodes.get("nrel_contact_email")
-        self.nrel_mail = ScKeynodes.get("nrel_mail")
+        super().__init__("action_send_mail")
+        self.rrel_contact_name = ScKeynodes.get("rrel_contact_name")
+        self.rrel_contact_email = ScKeynodes.get("rrel_contact_email")
+        self.rrel_mail = ScKeynodes.get("rrel_mail")
 
     def on_event(
         self,
@@ -51,10 +51,9 @@ class SendMailAgent(MailAgent):
             )
             return result
         except Exception as e:
-            self.logger.error("%s", e)
+            self.logger.error("Finished with error: %s", e)
 
     def run(self, action_node: ScAddr) -> ScResult:
-        self.logger.info("Started")
         message_addr, self.author_node = get_action_arguments(
             action_node,
             2,
@@ -95,17 +94,17 @@ class SendMailAgent(MailAgent):
 
     def get_mail(self, message_addr: ScAddr) -> Mail:
         contact: User | None = None
-        mail_link = search_element_by_non_role_relation(
+        mail_link = search_element_by_role_relation(
             message_addr,
-            self.nrel_mail,
+            self.rrel_mail,
         )
-        email_link = search_element_by_non_role_relation(
+        email_link = search_element_by_role_relation(
             message_addr,
-            self.nrel_contact_email,
+            self.rrel_contact_email,
         )
-        name_link = search_element_by_non_role_relation(
+        name_link = search_element_by_role_relation(
             message_addr,
-            self.nrel_contact_name,
+            self.rrel_contact_name,
         )
 
         if name_link:
@@ -113,7 +112,7 @@ class SendMailAgent(MailAgent):
 
         if email_link:
             contact = User(
-                name=' ',
+                name=" ",
                 email=get_link_content_data(email_link),
             )
         if contact is None:

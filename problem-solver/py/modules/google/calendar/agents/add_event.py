@@ -52,7 +52,6 @@ class AddEventAgent(CalendarAgent):
             self.logger.error("%s", e)
 
     def run(self, action_node: ScAddr) -> ScResult:
-        self.logger.info("Started")
         message_addr, self.author_node = get_action_arguments(
             action_node,
             2,
