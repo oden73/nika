@@ -14,7 +14,7 @@ from sc_kpm.utils.action_utils import (
     get_action_arguments,
 )
 
-from modules.google.auth.models import User
+from auth.models import User
 from modules.google.integration_agent import IntegrationAgent
 
 
@@ -34,6 +34,10 @@ class CreateContactAgent(IntegrationAgent):
         )
         self.rrel_contact_name = ScKeynodes.get("rrel_contact_name")
         self.rrel_contact_email = ScKeynodes.get("rrel_contact_email")
+
+    @property
+    def check_token_agent_action(self) -> str:
+        pass
 
     def on_event(
         self,
@@ -68,7 +72,7 @@ class CreateContactAgent(IntegrationAgent):
             self.rrel_contact_email,
         )
 
-            if not (self.author_node and name_link and email_link):
+            if not any([self.author_node, name_link, email_link]):
                 self.logger.error(
                     "Miss required action params: "
                     f"{self.author_node=}, {name_link=}, {email_link=}",

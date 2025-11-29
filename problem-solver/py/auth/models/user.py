@@ -7,8 +7,3 @@ class User(BaseModel):
 
     def __str__(self):
         return f"User<name={self.name}, email={self.email}>"
-
-
-class Author(User):
-    access_token: str
-    refresh_token: str | None = None

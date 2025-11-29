@@ -15,7 +15,7 @@ from sc_kpm.utils.action_utils import (
     get_action_arguments,
 )
 
-from modules.google.auth.models import User
+from auth.models import User
 from modules.google.mail.agents import MailAgent
 from modules.google.mail.models import Mail
 from secrets_env import GMAIL_PASS

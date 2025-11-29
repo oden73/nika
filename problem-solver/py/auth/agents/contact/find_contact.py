@@ -37,6 +37,10 @@ class FindContactAgent(IntegrationAgent):
             sc_type.CONST_NODE_NON_ROLE,
         )
 
+    @property
+    def check_token_agent_action(self) -> str:
+        pass
+
     def on_event(
         self,
         event_element: ScAddr,  # noqa: ARG002
@@ -57,12 +61,16 @@ class FindContactAgent(IntegrationAgent):
 
     def run(self, action_node: ScAddr) -> ScResult:
         name_link, self.author_node = get_action_arguments(action_node, 2)
-        assert all([name_link, self.author_node])
+        if not any([name_link, self.author_node]):
+            return ScResult.ERROR
+
         name = get_link_content_data(name_link)
         self.logger.info("Name link content: %s", name)
+
         contact_node = self.get_contact(name)
         if contact_node is None:
             return ScResult.ERROR
+
         generate_action_result(action_node, contact_node)
 
         return ScResult.OK

@@ -7,7 +7,7 @@ from modules.google.calendar.models import EventBase
 from modules.google.integration_agent import IntegrationAgent
 
 
-class CalendarAgent(IntegrationAgent):
+class GoogleCalendarAgent(IntegrationAgent):
     def __init__(self, action: str):
         super().__init__(action)
         self.calendar_id = "primary"
@@ -18,3 +18,7 @@ class CalendarAgent(IntegrationAgent):
     @abstractmethod
     def get_event(self, message_addr: ScAddr) -> EventBase:
         pass
+
+    @property
+    def check_token_agent_action(self) -> str:
+        return 'action_check_google_token'

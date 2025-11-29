@@ -16,7 +16,9 @@ from sc_kpm.utils.action_utils import (
     get_action_arguments,
 )
 
-from modules.google.calendar.agents.event_agent import CalendarAgent
+from modules.google.calendar.agents.calendar_agent import (
+    GoogleCalendarAgent,
+)
 from modules.google.calendar.models import (
     CalendarDateTime,
     EventBase,
@@ -31,7 +33,7 @@ logging.basicConfig(
 )
 
 
-class UpdateEventAgent(CalendarAgent):
+class UpdateEventAgent(GoogleCalendarAgent):
     def __init__(self):
         super().__init__("action_update_calendar_event")
         self.rrel_new_event_summary = ScKeynodes.get(
@@ -62,9 +64,9 @@ class UpdateEventAgent(CalendarAgent):
             action_node,
             2,
         )
-        author = self.get_author()
-        if author is None:
-            self.logger.error("Did not get author")
+        token = self.get_token()
+        if token is None:
+            self.logger.error("Did not get token")
             return ScResult.ERROR
         if not message_addr:
             self.logger.error("Did not have message address")
@@ -76,14 +78,14 @@ class UpdateEventAgent(CalendarAgent):
             self.logger.error("Did not get event")
             return ScResult.ERROR
         new_event = self.get_new_event(message_addr)
-        old_event = self.search_event(author.access_token, event)
+        old_event = self.search_event(token, event)
         if old_event is None:
             self.logger.info("Event hasn't been found in Google Calendar")
             return ScResult.ERROR
         self.logger.info(f"Found event: {old_event.summary}")
 
         res = self.update_event(
-            author.access_token,
+            token,
             old_event,
             new_event,
         )
