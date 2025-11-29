@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Text, Optional
 class TextSanitizer(GraphComponent):
     def __init__(self, config: Dict[Text, Any], model_storage: ModelStorage, resource: Optional[Resource] = None) -> None:
         super().__init__()
-        self.allowed_pattern = re.compile(r'[^\x00-\x7Fа-яА-ЯёЁ0-9 .,!?()\[\]{}\-+=<>:;\'"@#$%^&*_~]')
+        self.allowed_pattern = re.compile(r'[^\x00-\x7Fа-яА-ЯёЁ0-9 .,!?()\[\]{}\-+=<>:;\'"@#$%^&*_~№]')
 
     def process(self, messages: List[Message]) -> List[Message]:
         for message in messages:

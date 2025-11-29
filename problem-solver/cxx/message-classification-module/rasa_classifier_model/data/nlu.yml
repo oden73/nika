@@ -17,6 +17,9 @@ nlu:
       - Что такое [помидор](rrel_entity)?
       - Что такое [теорема Пифагора](rrel_entity)?
       - Что такое [нечёткое множество](rrel_entity)?
+      - Кто такой [Ника](rrel_entity)?
+      - Кто такой [перцептрон](rrel_entity)?
+      - Кто такой [анализатор](rrel_entity)?
   
   - intent: message_about_skill
     examples: |
@@ -67,6 +70,10 @@ nlu:
       - Какое условие в [4 лабе](rrel_entity)?
       - Какое условие [4 лр](rrel_entity)?
       - Какое условие [Лабораторной работы №4](rrel_entity)?
+      - Что нужно делать в [лабораторной работе №1](rrel_entity)?
+      - Что нужно делать в [2 лр](rrel_entity)?
+      - Что нужно делать в [Лабораторной работе №1](rrel_entity)?
+      - Что нужно делать в [четвертой лабе](rrel_entity)?
 
   - intent: message_about_lab_work_deadline
     examples: |

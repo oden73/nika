@@ -30,8 +30,7 @@ ScAddrVector RasaMessageTopicClassifier::classifyMessage(ScAddr const & messageA
 
   json const rasaResponse = client->getResponse(messageText);
 
-  // SC_LOG_INFO(rasaResponse);
-  logger->Info(rasaResponse.dump());
+  logger->Debug(rasaResponse.dump());
 
   if (rasaResponse.at(RasaConstants::INTENT).at("name") == RasaConstants::UNKNOWN_INTENT)
   {
@@ -55,7 +54,7 @@ std::string RasaMessageTopicClassifier::getMessageText(ScAddr const & messageAdd
   ScAddr const messageLink = messageSearcher->getMessageLink(messageAddr);
   if (!messageLink.IsValid())
   {
-    SC_THROW_EXCEPTION(utils::ExceptionItemNotFound, "Message link is not found.");
+    throw std::runtime_error("getMessageText() failed during execution.");
   }
   context->GetLinkContent(messageLink, linkContent);
   return linkContent;
@@ -95,7 +94,7 @@ ScAddrVector RasaMessageTopicClassifier::getMessageIntentClass(ScAddr const & me
     {
       if (messageIntent == rasaIdtf)
       {
-        SC_LOG_DEBUG("Found " << context->GetElementSystemIdentifier(possibleMessageCLass) << " intent class");
+        logger->Debug("Found " + context->GetElementSystemIdentifier(possibleMessageCLass) + " intent class");
         ScAddr messageIntentCLassEdge =
             context->GenerateConnector(ScType::ConstPermPosArc, possibleMessageCLass, messageAddr);
         messageIntentCLassElements.push_back(possibleMessageCLass);
@@ -225,7 +224,7 @@ ScAddrVector RasaMessageTopicClassifier::processEntities(
       }
     }
     entityIdtfToRole.insert({entityIdtf, entityRoleIdtf});
-    SC_LOG_DEBUG(entityIdtf << " " << entityRoleIdtf);
+    logger->Debug(entityIdtf + " " + entityRoleIdtf);
   }
 
   ScTemplate entityTemplate;
@@ -271,7 +270,7 @@ ScAddrVector RasaMessageTopicClassifier::processEntities(
         {
           if (std::find(identifiers.begin(), identifiers.end(), entitySameIdtf) != identifiers.end())
           {
-            SC_LOG_DEBUG("Found " << context->GetElementSystemIdentifier(entityAddr) << " entity");
+            logger->Debug("Found " + context->GetElementSystemIdentifier(entityAddr) + " entity");
             ScAddr messageEntityEdge =
                 context->GenerateConnector(ScType::ConstPermPosArc, messageAddr, entityAddr);
             ScAddr messageEntityRoleEdge =
@@ -301,8 +300,8 @@ ScAddrVector RasaMessageTopicClassifier::processEntities(
     ScAddr const & messageEntityRoleEdge =
         context->GenerateConnector(ScType::ConstPermPosArc, entityRole, messageEntityEdge);
 
-    SC_LOG_DEBUG("Generated " << notFoundEntitiesIdtf << " entity");
-    SC_LOG_DEBUG("Generated " << notFoundEntitiesRoles << " role");
+    logger->Debug("Generated " + notFoundEntitiesIdtf + " entity");
+    logger->Debug("Generated " + notFoundEntitiesRoles + " role");
 
     messageEntitiesElements.push_back(createdEntity);
     messageEntitiesElements.push_back(createdEntityEdge);

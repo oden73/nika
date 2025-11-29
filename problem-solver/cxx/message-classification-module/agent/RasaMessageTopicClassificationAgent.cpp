@@ -11,9 +11,8 @@
 using namespace messageClassificationModule;
 
 RasaMessageTopicClassificationAgent::RasaMessageTopicClassificationAgent()
-{
-  m_logger = utils::ScLogger(
-      utils::ScLogger::ScLogType::File, "logs/RasaMessageTopicClassificationAgent.log", utils::ScLogLevel::Debug, true);
+{m_logger = utils::ScLogger(
+      utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel(utils::ScLogLevel::Debug), true);
 }
 
 ScResult RasaMessageTopicClassificationAgent::DoProgram(ScActionInitiatedEvent const & event, ScAction & action)
@@ -40,6 +39,7 @@ ScResult RasaMessageTopicClassificationAgent::DoProgram(ScActionInitiatedEvent c
 
   if (answerElements.size() == 0)
   {
+    m_logger.Message(utils::ScLogLevel(utils::ScLogLevel::Info), "answerElements.size() == 0");  
     return action.FinishUnsuccessfully();
   }
 
