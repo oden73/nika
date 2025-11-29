@@ -88,7 +88,7 @@ services:
   
   rasa:
     build:
-      context: ./problem-solver/cxx/messageClassificationModule/rasa_classifier_model
+      context: ./problem-solver/cxx/message-classification-module/rasa_classifier_model
       dockerfile: Dockerfile.server
     container_name: rasa-server
     restart: unless-stopped
