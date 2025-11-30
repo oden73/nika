@@ -13,7 +13,7 @@ logging.basicConfig(
 
 class CreateYandexAuthorAgent(CreateAuthorAgent):
     def __init__(self):
-        super().__init__("action_create_author")
+        super().__init__("action_create_yandex_author")
 
     @property
     def service(self) -> YandexOauthUserService:
