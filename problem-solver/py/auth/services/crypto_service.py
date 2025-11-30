@@ -2,7 +2,7 @@ import base64
 
 from cryptography.fernet import Fernet
 
-from secrets_env import CRYPTO_KEY
+from yandex_secrets_env import CRYPTO_KEY
 
 
 class FernetTokenCrypto:
