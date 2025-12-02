@@ -37,7 +37,7 @@ export const YandexCallback = () => {
     const urlParams = new URLSearchParams(location.search);
     const code = urlParams.get('code');
     
-    if (code) {      
+    if (code) {
       handleYandexCode(code);
       const cleanUrl = window.location.pathname;
       window.history.replaceState({}, '', cleanUrl);

@@ -27,5 +27,5 @@ class YandexOauthUserService(OauthUserService):
 
         return User(
             name=user_data.get("real_name"),
-            email=user_data.get("default_email"),
+            email=user_data.get("default_email") or "email_is_none@gmail.com",
         )
