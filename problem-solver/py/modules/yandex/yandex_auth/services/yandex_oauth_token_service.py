@@ -18,7 +18,7 @@ class YandexOauthTokenService(OauthTokenService):
                 "client_secret": self.client.secret,
                 "code": code,
                 "grant_type": "authorization_code",
-                "redirect_uri": "http://localhost:3033/auth/callback",
+                "redirect_uri": "http://localhost:3033/auth/yandex/callback",
             },
             timeout=30,
         )

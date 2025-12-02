@@ -15,7 +15,7 @@ logging.basicConfig(
 
 class YandexCreateTokensAgent(CreateTokensAgent):
     def __init__(self):
-        super().__init__("action_create_google_tokens")
+        super().__init__("action_create_yandex_tokens")
 
     @property
     def service(self) -> YandexOauthTokenService:
