@@ -9,7 +9,8 @@ import { generateLinkText } from './newMessageAgent';
 const keynode_images = [
     { id: 'users', type: ScType.ConstNodeClass },
     { id: 'nrel_auth_session', type: ScType.NodeNonRole },
-    { id: 'action_create_author', type: ScType.ConstNodeClass },
+    { id: 'action_create_google_author', type: ScType.ConstNodeClass },
+    { id: 'action_create_yandex_author', type: ScType.ConstNodeClass },
     { id: "action", type: ScType.ConstNodeClass },
     { id: "action_initiated", type: ScType.ConstNodeClass },
     { id: "rrel_1", type: ScType.ConstNodeRole },
@@ -20,6 +21,7 @@ const keynode_images = [
 export const call_create_author_agent = async (
     code: string, 
     session: string,
+    action: string,
 ) => {
     try {
         console.log("Start calling create user agent")
@@ -43,7 +45,7 @@ export const call_create_author_agent = async (
                 [ScType.VarNode, action_node_alias]
             );
             template.triple(
-                keynodes["action_create_author"], 
+                keynodes[action], 
                 ScType.VarPermPosArc, 
                 action_node_alias
             );

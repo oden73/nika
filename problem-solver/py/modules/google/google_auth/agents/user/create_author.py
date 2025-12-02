@@ -13,7 +13,7 @@ logging.basicConfig(
 
 class CreateGoogleAuthorAgent(CreateAuthorAgent):
     def __init__(self):
-        super().__init__("action_create_author")
+        super().__init__("action_create_google_author")
 
     @property
     def service(self) -> GoogleOauthUserService:

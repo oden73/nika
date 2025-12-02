@@ -2,11 +2,11 @@ import { call_create_author_agent } from '@api/sc/agents/googleAuthAgent';
 import { useState, useCallback, useEffect } from 'react';
 
 // generate random session
-const generateSessionId = (): string => {
+export const generateSessionId = (): string => {
   return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 };
 
-const setCookie = (name: string, value: string, days: number = 7) => {
+export const setCookie = (name: string, value: string, days: number = 7) => {
   const expires = new Date();
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
   document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
@@ -27,45 +27,6 @@ export const getCookie = (name: string): string | null => {
 export const useGoogleAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-
-
-  useEffect(() => {
-    // set session if exists
-    const existingSession = getCookie('auth_session');
-    if (existingSession) {
-      setSessionId(existingSession);
-      console.log('Get existing auth session:', existingSession);
-    }
-  }, []);
-
-  const handleGoogleCode = async (code: string) => {
-    try {
-      const newSessionId = generateSessionId();
-      // create new session
-      console.log('Generate auth session:', newSessionId);
-      setCookie('auth_session', newSessionId, 7);
-      setSessionId(newSessionId);
-      await call_create_author_agent(code, newSessionId);
-
-    } catch (error) {
-      console.error('Get error with auth:', error);
-    }
-  };
-
-  useEffect(() => {
-    // try to find query param "code" in url
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    
-    if (code) {      
-      // generate session and call create user agent
-      handleGoogleCode(code);
-      window.history.replaceState({}, '', '/');
-    }
-  }, []);
-
-  
 
   const handleGoogleAuth = useCallback(() => {
     setIsLoading(true);
@@ -73,7 +34,7 @@ export const useGoogleAuth = () => {
     // use oauth2.0 technology
     // send request to google(get code param)
     const clientId = process.env.GOOGLE_CLIENT_ID;
-    const redirectUri = 'http://localhost:3033';
+    const redirectUri = 'http://localhost:3033/auth/google/callback';
     const scopes = [
       'email', 
       'profile', 

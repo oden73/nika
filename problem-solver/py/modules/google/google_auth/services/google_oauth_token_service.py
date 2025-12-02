@@ -19,7 +19,7 @@ class GoogleOauthTokenService(OauthTokenService):
                 "client_secret": self.client.secret,
                 "code": code,
                 "grant_type": "authorization_code",
-                "redirect_uri": "http://localhost:3033",
+                "redirect_uri": "http://localhost:3033/auth/google/callback",
             },
         )
         response.raise_for_status()

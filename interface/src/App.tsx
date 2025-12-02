@@ -1,8 +1,7 @@
 import { lazy, useEffect, useState} from "react";
-import { Route, Redirect } from "react-router-dom";
 import { loadingComponent } from '@components/LoadingComponent';
 import { routes } from '@constants';
-
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './assets/main.css';
 
@@ -16,20 +15,7 @@ const { Header, Content, Footer } = Layout;
 
 const Demo = loadingComponent(lazy(() => import('@pages/Demo')));
 const About = loadingComponent(lazy(() => import('@pages/About')));
-
-const DemoRoutes = () => (
-    <>
-        <Route exact path={routes.MAIN} component={Demo} />
-    </>
-);
-
-const AboutRoutes = () => (
-    <>
-        <Route path={routes.ABOUT}>
-            <About />
-        </Route>
-    </>
-);
+const GoogleCallback = loadingComponent(lazy(() => import('@pages/Callback/Google')));
 
 export const App = () => {
     const [headerBgColor, setHeaderBgColor] = useState<string>('#39494C');
@@ -55,17 +41,25 @@ export const App = () => {
     };
 
     return (
-        <Layout>
-            <Header style={headerStyles}>
-                <HeaderPanel />
-            </Header>
-            <Content style={mainStyles}>
-                <DemoRoutes />
-                <AboutRoutes />
-            </Content>
-            <Footer style={footerStyles}>
-                <FooterPanel />
-            </Footer>
-        </Layout>
-    );
+        <Router>
+      <Layout>
+        <Header style={headerStyles}>
+          <HeaderPanel />
+        </Header>
+        <Content style={mainStyles}>
+          <Switch> 
+            <Route exact path={routes.MAIN} component={Demo} />
+            <Route path={routes.ABOUT} component={About} />
+            <Route exact path={routes.GOOGLE_CALLBACK} component={GoogleCallback} />
+            <Route path="*">
+              <Redirect to={routes.MAIN} />
+            </Route>
+          </Switch>
+        </Content>
+        <Footer style={footerStyles}>
+          <FooterPanel />
+        </Footer>
+      </Layout>
+    </Router>
+  );
 };
