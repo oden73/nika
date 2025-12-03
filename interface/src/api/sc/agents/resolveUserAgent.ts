@@ -47,6 +47,7 @@ const getUser = async () => {
 }
 
 const createUser = async () => {
+    console.log("creating user");
     const keynodes = await client.resolveKeynodes(baseKeynodes);
     const user = '_user';
     const dialog = '_dialog';

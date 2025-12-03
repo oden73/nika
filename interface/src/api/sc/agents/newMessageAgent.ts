@@ -98,6 +98,7 @@ export const newMessageAgent = async (
 ) => {
     const keynodes = await client.resolveKeynodes(baseKeynodes);
 
+    console.log(author);
     const [template, userActionNodeAlias] = await describeAgent(
         chatNode,
         author,
