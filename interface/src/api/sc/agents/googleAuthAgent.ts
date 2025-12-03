@@ -5,6 +5,7 @@ import {
 } from 'ts-sc-client';
 import { client } from '@api/sc/client';
 import { generateLinkText } from './newMessageAgent';
+import { resolveUserAgent } from './resolveUserAgent'
 
 const keynode_images = [
     { id: 'users', type: ScType.ConstNodeClass },
@@ -24,7 +25,7 @@ export const call_create_author_agent = async (
     action: string,
 ) => {
     try {
-        console.log("Start calling create user agent")
+        console.log("Start calling create user agent");
         const keynodes = await client.resolveKeynodes(keynode_images);
         const user_node = await find_user_by_session(session, keynodes);
         if (!user_node)
@@ -72,8 +73,11 @@ export const call_create_author_agent = async (
                     ScType.VarPermPosArc,
                     keynodes["rrel_1"],
                 );
+            
 
-            await client.generateByTemplate(template, {});
+            await client.generateByTemplate(template, {});    
+            console.log("waiting for kb to create author");
+            await new Promise(resolve => setTimeout(resolve, 1000)); 
         }
         else {
             console.log(
