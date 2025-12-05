@@ -1,0 +1,7 @@
+concept_phrase_about_yandex_disc_resources
+<- sc_node_class;
+=> nrel_main_idtf:
+	[фраза о ресурсах яндекс диска пользователя]
+	(* <- lang_ru;; *);
+	[phrase about user's yandex disc resources]
+	(* <- lang_en;; *);;
