@@ -7,7 +7,7 @@ concept_message_about_yandex_disc_info
 	[message about user's yandex disc]
 	(* <- lang_en;; *);
 => nrel_rasa_idtf:
-    [concept_message_about_yandex_disc_info];
+    [message_about_yandex_disc_info];
 <- rrel_key_sc_element:
 	...
 	(*

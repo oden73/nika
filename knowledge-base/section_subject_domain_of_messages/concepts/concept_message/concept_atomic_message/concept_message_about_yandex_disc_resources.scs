@@ -7,7 +7,7 @@ concept_phrase_about_yandex_disc_resources
 	[message about user's yandex disc resources]
 	(* <- lang_en;; *);
 => nrel_rasa_idtf:
-    [concept_message_about_yandex_disc_resources];
+    [message_about_yandex_disc_resources];
 <- rrel_key_sc_element:
 	...
 	(*

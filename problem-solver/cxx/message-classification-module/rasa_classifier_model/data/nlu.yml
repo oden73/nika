@@ -85,6 +85,19 @@ nlu:
       - Когда защита [второй лр](rrel_entity)?
       - Когда можно сдать [третью лабу](rrel_entity)?
       - Когда нужно сдавать [лабораторную рработу №4](rrel_entity)?
+
+  - intent: message_about_yandex_disc_info
+    examples: |
+      - Статус яндекс диска
+      - Расскажи о моем яндекс диске
+      - Информация о яндекс диске
+      - Сколько места на яндекс диске?
+
+  - intent: message_about_yandex_disc_resources
+    examples: |
+      - Что на моем диске?
+      - Какие у меня файлы на диске?
+      - Список файлов диска
   
   - lookup: rrel_entity
     examples: |
