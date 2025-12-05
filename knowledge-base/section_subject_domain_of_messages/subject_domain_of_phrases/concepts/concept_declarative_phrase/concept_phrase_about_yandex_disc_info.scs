@@ -4,7 +4,7 @@ concept_phrase_about_yandex_disc_info
 	[фраза про информацию о яндекс диска пользователя]
 	(* <- lang_ru;; *);
 	[phrase about user's yandex disc information]
-	(* <- lang_en;; *);;
+	(* <- lang_en;; *);
 <- rrel_key_sc_element:
 	...
 	(*
