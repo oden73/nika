@@ -1,4 +1,4 @@
-from auth.models import OauthClient
+from auth.base.models import OauthClient
 from secrets_env import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
 
 

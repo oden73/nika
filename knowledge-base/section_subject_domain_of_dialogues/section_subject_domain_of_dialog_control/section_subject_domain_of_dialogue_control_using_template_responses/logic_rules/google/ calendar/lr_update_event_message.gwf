@@ -22,7 +22,7 @@
         <node type="node/var/perm/general" idtf="_message" shapeColor="0" id="349973712" parent="347376304" left="0" top="0" right="59.2344" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="1028.18" y="1082.59" haveBus="false" idtf_pos="0">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/group" idtf="action_update_calendar_event" shapeColor="0" id="349954960" parent="347376304" left="0" top="0" right="171.828" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="1274.82" y="986.726" haveBus="false" idtf_pos="2">
+        <node type="node/const/perm/group" idtf="action_update_google_calendar_event" shapeColor="0" id="349954960" parent="347376304" left="0" top="0" right="171.828" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="1274.82" y="986.726" haveBus="false" idtf_pos="2">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/var/perm/general" idtf="_reply_message" shapeColor="0" id="349100000" parent="347376304" left="0" top="0" right="92.4219" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="1158" y="1082.27" haveBus="false" idtf_pos="0">

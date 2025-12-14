@@ -15,7 +15,7 @@ from sc_kpm.utils.action_utils import (
     get_action_arguments,
 )
 
-from auth.models import User
+from auth.base.models import User
 from modules.google.mail.agents import MailAgent
 from modules.google.mail.models import Mail
 from secrets_env import GMAIL_PASS
@@ -31,8 +31,8 @@ logging.basicConfig(
 class SendMailAgent(MailAgent):
     def __init__(self):
         super().__init__("action_send_mail")
-        self.rrel_contact_name = ScKeynodes.get("rrel_contact_name")
-        self.rrel_contact_email = ScKeynodes.get("rrel_contact_email")
+        self.rrel_name = ScKeynodes.get("rrel_name")
+        self.rrel_email = ScKeynodes.get("rrel_email")
         self.rrel_mail = ScKeynodes.get("rrel_mail")
 
     def on_event(
@@ -100,11 +100,11 @@ class SendMailAgent(MailAgent):
         )
         email_link = search_element_by_role_relation(
             message_addr,
-            self.rrel_contact_email,
+            self.rrel_email,
         )
         name_link = search_element_by_role_relation(
             message_addr,
-            self.rrel_contact_name,
+            self.rrel_name,
         )
 
         if name_link:

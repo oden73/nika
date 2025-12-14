@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from auth.models import User
+from auth.base.models import User
 
 
 class Mail(BaseModel):

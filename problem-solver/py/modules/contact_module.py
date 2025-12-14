@@ -1,6 +1,6 @@
 from sc_kpm import ScModule
 
-from auth.agents import CreateContactAgent, FindContactAgent
+from auth.base.agents import CreateContactAgent, FindContactAgent
 
 
 class ContactModule(ScModule):

@@ -87,7 +87,7 @@
         <node type="node/const/perm/group" idtf="action_initiated" shapeColor="0" id="980280032" parent="980461088" left="0" top="0" right="91.7344" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="940.606" y="378" haveBus="false" idtf_pos="2">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/group" idtf="action_delete_calendar_event" shapeColor="0" id="981448304" parent="980461088" left="0" top="0" right="166.75" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="969.606" y="361" haveBus="false" idtf_pos="2">
+        <node type="node/const/perm/group" idtf="action_delete_google_calendar_event" shapeColor="0" id="981448304" parent="980461088" left="0" top="0" right="166.75" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="969.606" y="361" haveBus="false" idtf_pos="2">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/group" idtf="action" shapeColor="0" id="981485280" parent="980461088" left="0" top="0" right="41.2031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="985.606" y="379" haveBus="false" idtf_pos="0">

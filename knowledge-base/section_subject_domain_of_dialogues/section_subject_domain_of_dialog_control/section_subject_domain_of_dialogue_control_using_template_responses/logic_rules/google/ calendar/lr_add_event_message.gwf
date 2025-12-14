@@ -209,7 +209,7 @@
         <node type="node/const/perm/group" idtf="concept_atomic_message" shapeColor="0" id="826775936" parent="824075760" left="0" top="0" right="142.953" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="482.053" y="960.907" haveBus="false" idtf_pos="4">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/group" idtf="action_add_calendar_event" shapeColor="0" id="826703456" parent="824075760" left="0" top="0" right="155.234" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="599.584" y="936.134" haveBus="false" idtf_pos="3">
+        <node type="node/const/perm/group" idtf="action_add_google_calendar_event" shapeColor="0" id="826703456" parent="824075760" left="0" top="0" right="155.234" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="599.584" y="936.134" haveBus="false" idtf_pos="3">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/group" idtf="action_initiated" shapeColor="0" id="826685776" parent="824075760" left="0" top="0" right="91.7344" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="581.172" y="952.529" haveBus="false" idtf_pos="2">

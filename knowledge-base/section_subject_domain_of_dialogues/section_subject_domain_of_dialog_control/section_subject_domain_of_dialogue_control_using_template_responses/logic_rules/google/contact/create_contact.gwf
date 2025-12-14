@@ -10,10 +10,10 @@
         <node type="node/var/perm/general" idtf="_contact_name" shapeColor="0" id="115982224" parent="113438608" left="0" top="0" right="89.5625" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="727.967" y="417.48" haveBus="false" idtf_pos="0">
             <content type="1" mime_type="content/term" content_visibility="true" file_name=""><![CDATA[ ]]></content>
         </node>
-        <node type="node/const/perm/role" idtf="rrel_contact_email" shapeColor="0" id="116001408" parent="113438608" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="422.796" y="350.819" haveBus="false" idtf_pos="2">
+        <node type="node/const/perm/role" idtf="rrel_email" shapeColor="0" id="116001408" parent="113438608" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="422.796" y="350.819" haveBus="false" idtf_pos="2">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/role" idtf="rrel_contact_name" shapeColor="0" id="116018128" parent="113438608" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="657.459" y="358.638" haveBus="false" idtf_pos="0">
+        <node type="node/const/perm/role" idtf="rrel_name" shapeColor="0" id="116018128" parent="113438608" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="657.459" y="358.638" haveBus="false" idtf_pos="0">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/group" idtf="lang_en" shapeColor="0" id="116036272" parent="113438608" left="0" top="0" right="51.3125" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="298.817" y="552.59" haveBus="false" idtf_pos="1">

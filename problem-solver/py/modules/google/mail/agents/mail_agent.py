@@ -12,8 +12,8 @@ from sc_kpm.utils.action_utils import (
     get_action_result,
 )
 
-from auth.models import User
-from modules.google.integration_agent import IntegrationAgent
+from auth.base.agents.integration_agent import IntegrationAgent
+from auth.base.models import User
 
 
 logging.basicConfig(
@@ -29,7 +29,7 @@ class MailAgent(IntegrationAgent):
 
     @property
     def check_token_agent_action(self) -> str:
-        return 'action_check_google_token'
+        return "action_check_google_token"
 
     def get_contact(self, name_link: ScAddr) -> User:
         action_class_name = "action_find_contact"

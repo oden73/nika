@@ -36,7 +36,7 @@
                 <point x="702.913" y="165.509"/>
             </points>
         </contour>
-        <node type="node/const/perm/role" idtf="rrel_contact_name" shapeColor="0" id="731920880" parent="731964800" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="413.5" y="625.5" haveBus="false" idtf_pos="0">
+        <node type="node/const/perm/role" idtf="rrel_name" shapeColor="0" id="731920880" parent="731964800" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="413.5" y="625.5" haveBus="false" idtf_pos="0">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/general" idtf="" shapeColor="0" id="735437536" parent="731964800" x="489.8" y="774.8" haveBus="false" idtf_pos="0">
@@ -48,7 +48,7 @@
         <node type="node/const/perm/group" idtf="lang_en" shapeColor="0" id="730378896" parent="731964800" left="0" top="0" right="51.3125" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="595" y="732" haveBus="false" idtf_pos="0">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/role" idtf="rrel_contact_email" shapeColor="0" id="722864832" parent="731964800" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="348.5" y="773.5" haveBus="false" idtf_pos="2">
+        <node type="node/const/perm/role" idtf="rrel_email" shapeColor="0" id="722864832" parent="731964800" left="0" top="0" right="109.031" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="348.5" y="773.5" haveBus="false" idtf_pos="2">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/group" idtf="concept_create_contact_message" shapeColor="0" id="734982560" parent="731964800" left="0" top="0" right="184.781" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="323.5" y="609.5" haveBus="false" idtf_pos="3">
