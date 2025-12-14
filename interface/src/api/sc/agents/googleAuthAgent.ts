@@ -24,7 +24,7 @@ export const call_create_author_agent = async (
     action: string,
 ) => {
     try {
-        console.log("Start calling create user agent")
+        console.log("Start calling create user agent, session: ", session)
         const keynodes = await client.resolveKeynodes(keynode_images);
         const user_node = await find_user_by_session(session, keynodes);
         if (!user_node)

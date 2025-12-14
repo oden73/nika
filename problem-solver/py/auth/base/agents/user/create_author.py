@@ -34,6 +34,14 @@ class CreateAuthorAgent(ScAgentClassic, ABC):
     def __init__(self, action: str):
         super().__init__(action)
         self.lang_en: ScAddr = ScKeynodes.get("lang_en")
+        self.concept_dialogue: ScAddr = ScKeynodes.resolve(
+            "concept_dialogue",
+            sc_type.NODE_CLASS,
+        )
+        self.rrel_dialog_participant: ScAddr = ScKeynodes.resolve(
+            "rrel_dialog_participant",
+            sc_type.NODE_ROLE,
+        )
         self.nrel_name: ScAddr = ScKeynodes.resolve(
             "nrel_name",
             sc_type.CONST_NODE_NON_ROLE,
@@ -150,12 +158,27 @@ class CreateAuthorAgent(ScAgentClassic, ABC):
     def _create_author_node(self):
         template = ScTemplate()
         user_alias = "_user"
+        dialog = "_dialogue"
 
         # generate new user node
         template.triple(
             self.concept_user,
             sc_type.VAR_PERM_POS_ARC,
             sc_type.VAR_NODE >> user_alias,
+        )
+
+        template.triple(
+            self.concept_dialogue,
+            sc_type.VAR_PERM_POS_ARC,
+            sc_type.VAR_NODE >> dialog,
+        )
+
+        template.quintuple(
+            dialog,
+            sc_type.VAR_PERM_POS_ARC,
+            user_alias,
+            sc_type.VAR_PERM_POS_ARC,
+            self.rrel_dialog_participant,
         )
         res = generate_by_template(template)
         if res:

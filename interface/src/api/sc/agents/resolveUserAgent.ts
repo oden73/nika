@@ -1,25 +1,26 @@
 import {ScTemplate, ScType} from 'ts-sc-client';
 import { client } from '@api/sc';
-import { getCookie } from '@hooks/useGoogleAuth';
+import { getCookie, setCookie, generateSessionId } from '@hooks/useGoogleAuth';
+import { generateLinkText } from './newMessageAgent';
 
 const conceptUser = 'concept_user';
 const conceptDialog = 'concept_dialogue';
 const rrelDialogParticipant = 'rrel_dialog_participant';
-const nrelGoogleSession = 'nrel_auth_session';
+const nrelAuthSession = 'nrel_auth_session';
 
 const baseKeynodes = [
     { id: conceptUser, type: ScType.ConstNodeClass },
     { id: conceptDialog, type: ScType.ConstNodeClass },
     { id: rrelDialogParticipant, type: ScType.ConstNodeRole },
-    { id: nrelGoogleSession, type: ScType.ConstNodeNonRole },
+    { id: nrelAuthSession, type: ScType.ConstNodeNonRole },
 ];
 
 const getUser = async () => {
-    const session = getCookie('auth_session')
+    const session = getCookie('auth_session');
     if(!session) return null;
     
-    const res = await client.searchLinksByContents([session])
-    const session_link = res[0][0]
+    const res = await client.searchLinksByContents([session]);
+    const session_link = res[0][0];
     if(!session_link) return null;
 
     const keynodes = await client.resolveKeynodes(baseKeynodes);
@@ -34,19 +35,20 @@ const getUser = async () => {
 
     template.quintuple(
         user, ScType.VarCommonArc, session_link,
-        ScType.VarPermPosArc, keynodes[nrelGoogleSession]
-    )
+        ScType.VarPermPosArc, keynodes[nrelAuthSession]
+    );
 
     const result = await client.searchByTemplate(template);
     
     if (result.length === 1) {
-        console.log("Successfully find user node!")
+        console.log("Successfully find user node!");
         return result[0].get(user);
     }
+    console.log("Did not find user with session: ", session);
     return null;
 }
 
-const createUser = async () => {
+const createNotAuthUser = async () => {
     const keynodes = await client.resolveKeynodes(baseKeynodes);
     const user = '_user';
     const dialog = '_dialog';
@@ -69,14 +71,31 @@ const createUser = async () => {
         ScType.VarPermPosArc,
         keynodes[rrelDialogParticipant],
     );
+    const session = generateSessionId();
+    setCookie('auth_session', session);
+    const session_link = await generateLinkText(session);
+    if (session_link)
+    template.quintuple(
+        user,
+        ScType.VarCommonArc,
+        session_link,
+        ScType.VarPermPosArc,
+        keynodes[nrelAuthSession],
+    );
+
     const result = await client.generateByTemplate(template, {});
+    console.log("Create new not auth user, session:", session)
     return result?.get(user);
 }
 
-export const resolveUserAgent = async () => {
-    const user = await getUser();
-    if (user !== null) {
-        return user;
+export const resolveUserAgent = async () => {    
+    for (let attempt = 1; attempt <= 5; attempt++) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        const user = await getUser();
+        if (user !== null) {
+            return user;
+        }
     }
-    return await createUser();
+    return await createNotAuthUser();
 };

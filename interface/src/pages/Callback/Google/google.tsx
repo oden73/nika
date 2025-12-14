@@ -4,22 +4,26 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { call_create_author_agent } from '@api/sc/agents/googleAuthAgent';
 import { generateSessionId, setCookie } from '@hooks/useGoogleAuth';
 
+
 export const GoogleCallback = () => {
   const history = useHistory();
   const location = useLocation();
-  const [sessionId, setSessionId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   
   const handleGoogleCode = async (code: string) => {
     try {
-      const newSessionId = generateSessionId();
-      console.log('Generate auth session:', newSessionId);
-      setCookie('auth_session', newSessionId, 7);
-      setSessionId(newSessionId);
-      
+      const session = generateSessionId();
+      setCookie('auth_session', session);
+      // const session = getCookie('auth_session');
+      // if (!session) {
+      //   throw new Error('No session found');
+      // }
+      console.log('Generate auth session:', session);
+      // userService.resetCache();
+
       await call_create_author_agent(
         code, 
-        newSessionId, 
+        session, 
         "action_create_google_author"
       );
 
