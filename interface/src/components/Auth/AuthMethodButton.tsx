@@ -7,7 +7,7 @@ interface AuthMethodButtonProps {
   isLoading?: boolean;
   disabled?: boolean;
   className?: string;
-  type?: 'default' | 'google' | 'email' | 'github';
+  type?: 'google' | 'yandex' | 'email' | 'github';
 }
 
 const AuthMethodButton: React.FC<AuthMethodButtonProps> = ({

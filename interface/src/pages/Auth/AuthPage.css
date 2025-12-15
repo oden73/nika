@@ -178,13 +178,15 @@
 }
 
 /* Google Button */
-.google-auth-wrapper {
+.google-auth-wrapper,
+.yandex-auth-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.google-auth-wrapper button {
+.google-auth-wrapper button,
+.yandex-auth-wrapper button {
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
@@ -219,4 +221,28 @@
     padding: 14px 20px;
     font-size: 15px;
   }
+}
+
+.yandex-button {
+  color: #333;
+  border-color: #e0e0e0;
+}
+
+.yandex-button:hover:not(:disabled) {
+  border-color: #ff0000; /* Красный цвет Яндекса */
+  color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.02);
+}
+
+.yandex-button .auth-icon svg {
+  color: #ff0000;
+}
+
+.yandex-button:hover:not(:disabled) .auth-icon svg {
+  color: #ff0000;
+}
+
+/* Альтернативный вариант с более точным лого Яндекса */
+.yandex-auth-wrapper .auth-icon svg {
+  fill: currentColor;
 }

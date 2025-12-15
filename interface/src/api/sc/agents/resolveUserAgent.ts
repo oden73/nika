@@ -1,26 +1,17 @@
 import {ScTemplate, ScType} from 'ts-sc-client';
 import { client } from '@api/sc';
-<<<<<<< HEAD
 import { getCookie, setCookie, generateSessionId } from '@hooks/useGoogleAuth';
 import { generateLinkText } from './newMessageAgent';
-=======
-import { getCookie } from '@hooks/useGoogleAuth';
->>>>>>> maxim/feat/yandex_disc
 
 const conceptUser = 'concept_user';
 const conceptDialog = 'concept_dialogue';
 const rrelDialogParticipant = 'rrel_dialog_participant';
-<<<<<<< HEAD
 const nrelAuthSession = 'nrel_auth_session';
-=======
-const nrelGoogleSession = 'nrel_auth_session';
->>>>>>> maxim/feat/yandex_disc
 
 const baseKeynodes = [
     { id: conceptUser, type: ScType.ConstNodeClass },
     { id: conceptDialog, type: ScType.ConstNodeClass },
     { id: rrelDialogParticipant, type: ScType.ConstNodeRole },
-<<<<<<< HEAD
     { id: nrelAuthSession, type: ScType.ConstNodeNonRole },
 ];
 
@@ -30,17 +21,6 @@ const getUser = async () => {
     
     const res = await client.searchLinksByContents([session]);
     const session_link = res[0][0];
-=======
-    { id: nrelGoogleSession, type: ScType.ConstNodeNonRole },
-];
-
-const getUser = async () => {
-    const session = getCookie('auth_session')
-    if(!session) return null;
-    
-    const res = await client.searchLinksByContents([session])
-    const session_link = res[0][0]
->>>>>>> maxim/feat/yandex_disc
     if(!session_link) return null;
 
     const keynodes = await client.resolveKeynodes(baseKeynodes);
@@ -55,34 +35,20 @@ const getUser = async () => {
 
     template.quintuple(
         user, ScType.VarCommonArc, session_link,
-<<<<<<< HEAD
         ScType.VarPermPosArc, keynodes[nrelAuthSession]
     );
-=======
-        ScType.VarPermPosArc, keynodes[nrelGoogleSession]
-    )
->>>>>>> maxim/feat/yandex_disc
 
     const result = await client.searchByTemplate(template);
     
     if (result.length === 1) {
-<<<<<<< HEAD
         console.log("Successfully find user node!");
-=======
-        console.log("Successfully find user node!")
->>>>>>> maxim/feat/yandex_disc
         return result[0].get(user);
     }
     console.log("Did not find user with session: ", session);
     return null;
 }
 
-<<<<<<< HEAD
 const createNotAuthUser = async () => {
-=======
-const createUser = async () => {
-    console.log("creating user");
->>>>>>> maxim/feat/yandex_disc
     const keynodes = await client.resolveKeynodes(baseKeynodes);
     const user = '_user';
     const dialog = '_dialog';
@@ -131,10 +97,6 @@ export const resolveUserAgent = async () => {
             return user;
         }
     }
-<<<<<<< HEAD
     return await createNotAuthUser();
 };
-=======
-    return await createUser();
-};
->>>>>>> maxim/feat/yandex_disc
+

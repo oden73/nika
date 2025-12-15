@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '@constants';
 import GoogleAuthButton from '@components/Auth/GoogleAuthButton';
+import YandexAuthButton from '@components/Auth/YandexAuthButton';
 import './AuthPage.css';
 
 export const AuthPage = () => {
@@ -25,7 +26,9 @@ export const AuthPage = () => {
             <div className="auth-method">
               <GoogleAuthButton />
             </div>
-
+            <div className="auth-method">
+              <YandexAuthButton />
+            </div>
           </div>
 
           {/* Кнопка возврата */}
