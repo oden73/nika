@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { call_create_author_agent } from '@api/sc/agents/googleAuthAgent';
+=======
+>>>>>>> maxim/feat/yandex_disc
 import { useState, useCallback, useEffect } from 'react';
 
 // generate random session
@@ -6,7 +9,11 @@ export const generateSessionId = (): string => {
   return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 };
 
+<<<<<<< HEAD
 export const setCookie = (name: string, value: string, days: number = 1) => {
+=======
+export const setCookie = (name: string, value: string, days: number = 7) => {
+>>>>>>> maxim/feat/yandex_disc
   const expires = new Date();
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
   document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;

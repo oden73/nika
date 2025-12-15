@@ -98,6 +98,10 @@ export const newMessageAgent = async (
 ) => {
     const keynodes = await client.resolveKeynodes(baseKeynodes);
 
+<<<<<<< HEAD
+=======
+    console.log(author);
+>>>>>>> maxim/feat/yandex_disc
     const [template, userActionNodeAlias] = await describeAgent(
         chatNode,
         author,

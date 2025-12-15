@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from __future__ import annotations
 
 import argparse
@@ -12,6 +13,13 @@ from modules import (
     LaunchModule,
     WeatherModule,
 )
+=======
+import argparse
+from sc_kpm import ScServer
+from modules.messageProcessingModule.MessageProcessingModule import MessageProcessingModule
+from modules.yandex.yandex_auth.auth_module import YandexAuthModule
+from modules.yandex.yandex_disc.yandex_disc_module import YandexDiscModule
+>>>>>>> maxim/feat/yandex_disc
 
 
 SC_SERVER_PROTOCOL = "protocol"
@@ -29,6 +37,7 @@ def main(args: dict):
 
     with server.connect():
         modules = [
+<<<<<<< HEAD
             WeatherModule(),
             GoogleAuthModule(),
             GoogleCalendarModule(),
@@ -36,6 +45,12 @@ def main(args: dict):
             LaunchModule(),
             ContactModule(),
             ]
+=======
+            MessageProcessingModule(),
+            YandexAuthModule(),
+            YandexDiscModule()
+        ]
+>>>>>>> maxim/feat/yandex_disc
         server.add_modules(*modules)
         with server.register_modules():
             server.serve()
