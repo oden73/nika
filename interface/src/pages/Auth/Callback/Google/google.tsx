@@ -14,12 +14,7 @@ export const GoogleCallback = () => {
     try {
       const session = generateSessionId();
       setCookie('auth_session', session);
-      // const session = getCookie('auth_session');
-      // if (!session) {
-      //   throw new Error('No session found');
-      // }
       console.log('Generate auth session:', session);
-      // userService.resetCache();
 
       await call_create_author_agent(
         code, 

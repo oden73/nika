@@ -1,5 +1,3 @@
-import { routes } from '@constants';
-import { NavLink } from 'react-router-dom';
 import AuthButton from './AuthButton';
 import HomeButton from './HomeButton';
 import AboutButton from './AboutButton';
@@ -12,14 +10,10 @@ export const HeaderPanel = () => {
       <div className="nav-container">
         <ul className="nav">
           <li>
-            <NavLink exact to={routes.MAIN} className="nav-icon-link">
-              <HomeButton />
-            </NavLink>
+            <HomeButton />
           </li>
           <li>
-            <NavLink to={routes.ABOUT} className="nav-icon-link">
-              <AboutButton />
-            </NavLink>
+            <AboutButton />
           </li>
           <li>
             <AuthButton />

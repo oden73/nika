@@ -10,12 +10,13 @@ import { Layout } from 'antd';
 import { HeaderPanel } from "@components/Header";
 import { FooterPanel } from "@components/Footer";
 import { fetchColorValue } from "@api/sc/agents/fetchColorValueAgent";
+import { AuthPage } from "@pages/Auth/AuthPage";
 
 const { Header, Content, Footer } = Layout;
 
 const Demo = loadingComponent(lazy(() => import('@pages/Demo')));
 const About = loadingComponent(lazy(() => import('@pages/About')));
-const GoogleCallback = loadingComponent(lazy(() => import('@pages/Callback/Google')));
+const GoogleCallback = loadingComponent(lazy(() => import('@pages/Auth/Callback/Google')));
 
 export const App = () => {
     const [headerBgColor, setHeaderBgColor] = useState<string>('#39494C');
@@ -51,6 +52,7 @@ export const App = () => {
             <Route exact path={routes.MAIN} component={Demo} />
             <Route path={routes.ABOUT} component={About} />
             <Route exact path={routes.GOOGLE_CALLBACK} component={GoogleCallback} />
+            <Route path={routes.AUTH} component={AuthPage} />
             <Route path="*">
               <Redirect to={routes.MAIN} />
             </Route>
