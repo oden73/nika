@@ -7,7 +7,7 @@ import {
 import { client } from "@api";
 
 
-export async function fetchColorValue(funcChange) {
+export async function fetchColorValue(funcChange: ((color: string) => void)[]) {
     
     const conceptHeader = 'concept_header';
     const conceptFooter = 'concept_footer';
@@ -47,12 +47,23 @@ export async function fetchColorValue(funcChange) {
         const resultColorLink = await client.searchByTemplate(template);
         
         if (resultColorLink.length) {
-            const colorLink = resultColorLink[0].get(colorAlias);
+            const colorLink = resultColorLink[0].get('_color');
             const resultColor = await client.getLinkContents([colorLink]);
             if (resultColor.length) {
                 let color = resultColor[0].data;
-                funcChange[i](color as any);
-                const eventParams = new ScEventSubscriptionParams(colorLink, ScEventType.BeforeChangeLinkContent, fetchColorValue);
+                
+                // ДОБАВЬТЕ ПРОВЕРКУ ПЕРЕД ВЫЗОВОМ
+                if (funcChange[i] && typeof funcChange[i] === 'function') {
+                    funcChange[i](color as string);
+                } else {
+                    console.error(`funcChange[${i}] is not a function:`, funcChange[i]);
+                }
+                
+                const eventParams = new ScEventSubscriptionParams(
+                    colorLink, 
+                    ScEventType.BeforeChangeLinkContent, 
+                    () => fetchColorValue(funcChange)
+                );
                 await client.createElementaryEventSubscriptions([eventParams]); 
             }
         }    
