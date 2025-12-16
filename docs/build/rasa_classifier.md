@@ -4,19 +4,19 @@
 
 1. **config.yml**
 
-This file configures the NLU pipeline for Russian and English languages. It supplements the standard classifier defined in the file with custom components that the user can add for various purposes.
+    This file configures the NLU pipeline for Russian and English languages. It supplements the standard classifier defined in the file with custom components that the user can add for various purposes.
 
 2. **data/nlu.yml**
 
-A file for defining custom intents and providing examples for them. It also allows for annotating entities within messages. This is the primary dataset used for model training.
+    A file for defining custom intents and providing examples for them. It also allows for annotating entities within messages. This is the primary dataset used for model training.
 
 3. **replacements.yml**
 
-A file used by one of the custom components for word replacements. For example, if a message contains the word "Бресте" (inflected form), the resulting entity extraction will return "Брест" (base form).
+    A file used by one of the custom components for word replacements. For example, if a message contains the word "Бресте" (inflected form), the resulting entity extraction will return "Брест" (base form).
 
 4. **components**
 
-A directory where users can place their custom components. To enable a component, it must subsequently be specified in `config.yml`.
+    A directory where users can place their custom components. To enable a component, it must subsequently be specified in `config.yml`.
 
 ## Building the Classifier
 
